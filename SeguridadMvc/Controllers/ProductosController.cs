@@ -7,12 +7,29 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SeguridadMvc.Models;
+using SeguridadMvc.Seguridad;
 
 namespace SeguridadMvc.Controllers
 {
     [Authorize]
     public class ProductosController : Controller
     {
+
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (filterContext.ActionDescriptor.ActionName.Equals("Delete"))
+            {
+
+                var prin = (PrincipalPersonalizado) User;
+                if (prin.MiCustomIdentity.IdUsuario != 3)
+                {
+                    filterContext.Result=new RedirectResult("/Login/Index");
+                }
+            }
+            base.OnActionExecuting(filterContext);
+        }
+
         private SeguridadDemoEntities db = new SeguridadDemoEntities();
 
         // GET: Productos
