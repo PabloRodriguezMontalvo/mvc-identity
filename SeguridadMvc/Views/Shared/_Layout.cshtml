@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using SeguridadMvc.Seguridad
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -29,6 +30,8 @@
     <div class="container body-content">
         @if (User.Identity.IsAuthenticated)
         {
+            
+            
         <h1>Bienvenido @User.Identity.Name</h1>    
         }
         

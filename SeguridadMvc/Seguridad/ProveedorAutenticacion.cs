@@ -71,7 +71,14 @@ namespace SeguridadMvc.Seguridad
 
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
-            throw new NotImplementedException();
+            var db = new SeguridadDemoEntities();
+            var us = db.Usuario.FirstOrDefault(o => o.login == username);
+            if (us != null)
+            {
+                var mu = new UsuarioProveedorIdentidad(us);
+                return mu;
+            }
+            return null;
         }
 
         public override string GetUserNameByEmail(string email)

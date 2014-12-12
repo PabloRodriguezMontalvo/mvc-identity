@@ -22,12 +22,19 @@ namespace SeguridadMvc.Seguridad
         public String Nombre { get; set; }
         public String Apellidos { get; set; }
         public int IdUsuario { get; set; }
+        public String[] Roles { get; set; }
+
 
         public ProveedorIdentidad(IIdentity identity)
         {
             Identity = identity;
-            var usuario = (ProveedorAutenticacion)Membership.GetUser(identity.Name);
+            var usuario = 
+                (UsuarioProveedorIdentidad)Membership.GetUser(identity.Name,false);
 
+            Nombre = usuario.Nombre;
+            Apellidos = usuario.Apellidos;
+            IdUsuario = usuario.IdUsuario;
+            Roles = usuario.Roles;
         }
 
 
