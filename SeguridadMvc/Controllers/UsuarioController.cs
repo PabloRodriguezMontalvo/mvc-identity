@@ -30,5 +30,11 @@ namespace SeguridadMvc.Controllers
                 return View(modelo);
             }
         }
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+           return RedirectToAction("Login");
+        }
     }
 }
